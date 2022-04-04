@@ -19,7 +19,7 @@ const imageSchema = new mongoose.Schema({
     required: [true, "Profile photo is required"]
   },
   contentType: String,
-})
+});
 
 
 const workerSchema = new Schema(

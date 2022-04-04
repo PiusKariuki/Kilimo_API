@@ -1,6 +1,7 @@
 const workers = require("../models/workerSchema");
 const passport = require("passport");
 const jwt = require("jsonwebtoken");
+// const seed = require("../config/seed");
 
 require("dotenv").config({ path: `${__dirname}/../../.env` });
 
@@ -63,16 +64,20 @@ exports.userLogin = (req, res, next) => {
 };
 
 exports.adminLogin = (req, res, next) => {
+	// seed();
 	/*custom callback */
 	passport.authenticate("manager", (err, user, info) => {
 		if (err || !user) {
-			res.statusCode = 401;
-			res.setHeader("Content-Type", "application/json");
-			res.json(info.message);
+			return res
+				.status(401)
+				.setHeader("Content-Type", "application/json")
+				.json(info.message);
+			// res.statusCode = 401;
+			// res.setHeader("Content-Type", "application/json");
+			// res.json(info.message);
 		}
 
 		req.logIn(user, { session: false }, (error) => {
-			seed();
 			if (error) {
 				return res
 					.status(422)
