@@ -3,7 +3,7 @@ const path = require("path");
 const logger = require("morgan");
 const passport = require("passport");
 const cors = require("cors");
-const helmet  = require("helmet");
+// const helmet  = require("helmet");
 
 module.exports = app = express();
 
@@ -27,4 +27,4 @@ app.use(function (err, req, res, next) {
   res.render("error");
 });
 
-app.use(helmet());
+// app.use(helmet());

@@ -24,8 +24,8 @@ app.use(require("./src/routes/ROUTE_MOUNTER"));
 /*****************
  *SERVER INSTANTIATION
  *****************/
-const port = process.env.PORT || 5000;
-app.listen(port);
+// const port = process.env.PORT || 5000;
+// app.listen(port);
 connect();
 
 module.exports = app;
