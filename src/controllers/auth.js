@@ -1,7 +1,6 @@
 const workers = require("../models/workerSchema");
 const passport = require("passport");
 const jwt = require("jsonwebtoken");
-// const seed = require("../config/seed");
 
 require("dotenv").config({ path: `${__dirname}/../../.env` });
 
@@ -64,7 +63,6 @@ exports.userLogin = (req, res, next) => {
 };
 
 exports.adminLogin = (req, res, next) => {
-	// seed();
 	/*custom callback */
 	passport.authenticate("manager", (err, user, info) => {
 		if (err || !user) {
