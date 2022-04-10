@@ -2,39 +2,41 @@ const workerModel = require("../models/workerSchema");
 
 exports.getAllWorkers = (req, res, next) => {
   workerModel
-    .find({})
-    .sort("-_id")
-    .then(
-      (workers) => {
-        res.statusCode = 200;
-        res.setHeader("Content-Type", "application/json");
-        res.json(workers);
-      },
-      (err) => next(err)
-    )
-    .catch((err) => next(err));
+		.find({})
+		.select("-profilePicture")
+		.sort("-_id")
+		.then(
+			(workers) => {
+				res.statusCode = 200;
+				res.setHeader("Content-Type", "application/json");
+				res.json(workers);
+			},
+			(err) => next(err)
+		)
+		.catch((err) => next(err));
 };
 
 exports.getWorkerById = (req, res, next) => {
   workerModel
-    .findById(req.params.workerId)
-    .then(
-      (worker) => {
-        res.statusCode = 200;
-        res.setHeader("Content-Type", "application/json");
-        res.json(worker);
-      },
-      (err) => {
-        res.statusCode = 422;
-        res.setHeader("Content-Type", "application/json");
-        res.json(err.errors);
-      }
-    )
-    .catch((err) => {
-      res.statusCode = 422;
-      res.setHeader("Content-Type", "application/json");
-      res.json(err.errors);
-    });
+		.findById(req.params.workerId)
+		.select("-profilePicture")
+		.then(
+			(worker) => {
+				res.statusCode = 200;
+				res.setHeader("Content-Type", "application/json");
+				res.json(worker);
+			},
+			(err) => {
+				res.statusCode = 422;
+				res.setHeader("Content-Type", "application/json");
+				res.json(err.errors);
+			}
+		)
+		.catch((err) => {
+			res.statusCode = 422;
+			res.setHeader("Content-Type", "application/json");
+			res.json(err.errors);
+		});
 };
 
 exports.addWorker = (req, res, next) => {
